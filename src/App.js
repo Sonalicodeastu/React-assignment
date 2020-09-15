@@ -22,7 +22,7 @@ class App extends Component {
       city:false,
       state:false,
     },
-    disable:true
+    checked:false
 
   };
   handleOnChange = event => {
@@ -55,16 +55,26 @@ class App extends Component {
   };
   
   enabled = () => {
-    const { address, apt, zipcode, city, state } = this.state.errors;
-    console.log(address);
-    console.log(apt);
-    console.log(zipcode);
-    console.log(city);
-    console.log(state);
-    console.log(this.state.errors && address && apt && zipcode && city && state);
-    return (this.state.errors && address && apt && zipcode && city && state)
-};
-//&& !address && !apt && !zipcode && !city && !state
+   
+    const { address, apt, city, zipcode, state } = this.state.inputs;
+    return (
+      address.length === 0 ||
+      apt.length === 0 ||
+      city.length === 0 ||
+      zipcode.length === 0 ||
+      state.length === 0||
+      !this.state.checked
+    );
+  };
+
+handleChange =() => {
+  this.setState({
+    checked:!this.state.checked
+
+});
+}
+
+
 
   render(){
     
@@ -74,6 +84,7 @@ class App extends Component {
       <form  noValidate>
         <img src={heading} className="heading" alt="heading" />
         <img src={subheading} className="svgimage" alt="subheading"/>
+        <div className="container">
     <span className="label">Address</span><br/>
     <input  type="text"
     className={
@@ -85,9 +96,11 @@ class App extends Component {
      onBlur={this.handleOnBlur} 
      required />
      <p className="red">{this.state.errors.address ? "This field cannot be Empty" : ""}</p>
+     </div>
+     <div className="container">
     <span className="label">Address (Apt, suite, floor)</span><br/>
     <input className={
-    this.state.errors.address ? "inputField form-input-fail" : "inputField"
+    this.state.errors.apt ? "inputField form-input-fail" : "inputField"
       }  type="text" 
       name="apt"
       value={this.state.inputs.apt}
@@ -95,6 +108,8 @@ class App extends Component {
       onBlur={this.handleOnBlur} 
         required/>
         <p className="red">{this.state.errors.apt ? "This field cannot be Empty" : ""}</p>
+        </div>
+     
     <div className="halfGrid"> <span className="label">Zipcode</span><br/>
       <input className={
     this.state.errors.zipcode ? "inputField form-input-fail" : "inputField"
@@ -117,7 +132,7 @@ class App extends Component {
       onChange={this.handleOnChange}
       onBlur={this.handleOnBlur} />
         <br/>
-        <p className="red">{this.state.errors.city ? "This field cannot be Empty" : ""}</p>
+        <p className="red-city">{this.state.errors.city ? "This field cannot be Empty" : ""}</p>
       </div>
       <div className="half-right"><span className="label">State</span><br/>
         <input className={
@@ -128,11 +143,11 @@ class App extends Component {
       onChange={this.handleOnChange}
       onBlur={this.handleOnBlur}/>
         <br/>
-        <p className="red">{this.state.errors.state ? "This field cannot be Empty" : ""}</p>
+        <p className="red-city">{this.state.errors.state ? "This field cannot be Empty" : ""}</p>
       </div>
     </div>
     <div className="check">
-      <input className="checkbox" type="checkbox" checked/><span className="label">Save my address for future use</span>
+      <input className="checkbox" type="checkbox" onChange={this.handleChange} /><span className="label">Save my address for future use</span>
     </div>
     <button type="submit" className="borderbutton" disabled={this.enabled()}>Send kit</button>
     </form>

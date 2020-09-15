@@ -2,7 +2,9 @@
 	margin: auto;
 	width: 421px;
 }
-
+.inputField.form-input-fail {
+    border: 1px solid red;
+}
 .Left {
 	width: 426px;
 	height: 35px;
@@ -29,15 +31,24 @@
 	height: 33px;
 	/*margin-bottom: 32px;*/
 }
-
+.container {
+    position: relative;
+}
 .inputField:focus {
 	outline: none;
-	border: 0px;
+	border: 1px solid #fff;
 	border-bottom: 2px solid darkgray;
 	width: 100%;
 }
+.halfGrid {
+    position: relative;
+}
 .red{
-	color: red;
+    color: red;
+    position: absolute;
+    left: 430px;
+    width: 300px;
+    top: 50px;
 }
 .inputFieldHalf {
 	border: none;
@@ -60,12 +71,21 @@
 	float: left;
 }
 
+.red-city {
+    color: red;
+    position: absolute;
+    left: 440px;
+	top: 60px;
+    width: 200px;
+}
 .whole::after {
 	content: "";
 	clear: both;
 	display: table;
 }
-
+.whole {
+    position: relative;
+}
 .check {
 	color: darkgray;
 	margin-bottom: 43px;
@@ -79,10 +99,10 @@
 
 .borderbutton {
 	width: 100%;
-	border: 1px solid orange;
+	/*border: 1px solid orange;
 	color: orange;
 	font-weight: 600;
-	font-size: 22px;
+	font-size: 22px;*/
 	height: 40px;
 	background: #fff;
 }
