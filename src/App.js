@@ -38,7 +38,8 @@ class App extends Component {
 
   handleOnBlur = (event) => {
     const { inputs } = this.state;
-    if (inputs[event.target.name].length === 0) {
+    let _ = require("underscore");
+    if (_.isEmpty(inputs[event.target.name])) {
       this.setState({
         errors: {
           ...this.state.errors,
@@ -50,12 +51,13 @@ class App extends Component {
 
   enabled = () => {
     const { address, apt, city, zipcode, state } = this.state.inputs;
+    let _ = require("underscore");
     return (
-      address.length === 0 ||
-      apt.length === 0 ||
-      city.length === 0 ||
-      zipcode.length === 0 ||
-      state.length === 0 ||
+      _.isEmpty(address) ||
+      _.isEmpty(apt) ||
+      _.isEmpty(city) ||
+      _.isEmpty(zipcode) ||
+      _.isEmpty(state) ||
       !this.state.checked
     );
   };
