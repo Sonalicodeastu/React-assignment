@@ -24,7 +24,7 @@ class App extends React.Component {
       })
       .catch((err) => {});
   }
-  flights() {
+  flights = () => {
     console.log(this.state.flights);
     return _.map(this.state.flights, (plane) => {
       return (
@@ -35,7 +35,7 @@ class App extends React.Component {
         </li>
       );
     });
-  }
+  };
 
   render() {
     console.log(this.state.array);

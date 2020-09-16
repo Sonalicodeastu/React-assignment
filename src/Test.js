@@ -3,13 +3,13 @@
 
 
 function showName(firstName, lastName, ...titles) {//Rest parameter
-    alert( firstName + ' ' + lastName ); // Julius Caesar
+    console.log( firstName + ' ' + lastName ); // Julius Caesar
   
     // the rest go into titles array
     // i.e. titles = ["Consul", "Imperator"]
-    alert( titles[0] ); // Consul
-    alert( titles[1] ); // Imperator
-    alert( titles.length ); // 2
+    console.log( titles[0] ); // Consul
+    console.log( titles[1] ); // Imperator
+    console.log( titles.length ); // 2
   }
   
   //function can be called with any number of arguments, no matter how it is defined.There will be no error because of “excessive” arguments. The rest parameters gather all remaining arguments.The ...rest must always be last.
@@ -18,7 +18,10 @@ function showName(firstName, lastName, ...titles) {//Rest parameter
 
   let arr = [3, 5, 1];
 
-alert( Math.max(...arr) ); // 5 spread turns array into a list of arguments. It remove the square brackets from the array so we can directly access the elemnts of the array
+  console.log( Math.max(...arr) ); // 5 spread turns array into a list of arguments. It remove the square brackets from the array so we can directly access the elemnts of the array. spread opearator copies the value using pass by value approach
+
+
+
 
 //async await
 
@@ -28,21 +31,27 @@ function f() {
     let promise = Promise.resolve(1);
     let result = await promise; // Syntax error
   }
+// we can write like this
+const initField = async () => { 
+  const getData = await yourAPicall(); 
+  if (getData) {
+  // your custom js logic
+  }
+   } 
+
 
   //map()
 //The map() method creates a new array with the results of calling a function for every array element.
-  var numbers = [65, 44, 12, 4];
-var newarray = numbers.map(myFunction)
+const numbers = [65, 44, 12, 4];
+const newarray = numbers.map(() => num * 10)
 
-function myFunction(num) {
-  return num * 10;
-}
+
 
 document.getElementById("demo").innerHTML = newarray;
 
 //reduce
 //The reduce() method reduces the array to a single value. The reduce() method executes a provided function for each value of the array 
-var numbers = [15.5, 2.3, 1.1, 4.7];
+let numbers = [15.5, 2.3, 1.1, 4.7];
 
 function getSum(total, num) {
   return total + Math.round(num);
@@ -54,7 +63,7 @@ function myFunction(item) {
 //filter
 //The filter() method creates an array filled with all array elements that pass a test
 
-var ages = [32, 33, 16, 40];
+let ages = [32, 33, 16, 40];
 
 function checkAdult(age) {
   return age >= 18;
@@ -67,7 +76,7 @@ function myFunction() {
 //foreach
 
 //The forEach() method calls a function once for each element in an array, in order.
-var fruits = ["apple", "orange", "cherry"];
+let fruits = ["apple", "orange", "cherry"];
 fruits.forEach(myFunction);
 
 function myFunction(item, index) {
@@ -76,36 +85,36 @@ function myFunction(item, index) {
 
 //pop
 //pop() removes the last element from the array
-var fruits = ["Banana", "Orange", "Apple", "Mango"];
+let fruits = ["Banana", "Orange", "Apple", "Mango"];
 fruits.pop(); 
 
 //push
 // push inserts an element in last index of the array
-var fruits = ["Banana", "Orange", "Apple", "Mango"];
+let fruits = ["Banana", "Orange", "Apple", "Mango"];
 fruits.push("Kiwi"); 
 
 //shift
 // shift() removes the first elemnt from the array
-var fruits = ["Banana", "Orange", "Apple", "Mango"];
+let fruits = ["Banana", "Orange", "Apple", "Mango"];
 fruits.shift();            // Removes the first element "Banana" from fruits
 
 //unshift
 // unshift() adds an element to the first index of the array
-var fruits = ["Banana", "Orange", "Apple", "Mango"];
+let fruits = ["Banana", "Orange", "Apple", "Mango"];
 fruits.unshift("Lemon");    // Returns 5
 
 //splice
 
 //The splice() method adds/removes items to/from an array, and returns the removed item(s).
 
-var fruits = ["Banana", "Orange", "Apple", "Mango"];
+let fruits = ["Banana", "Orange", "Apple", "Mango"];
 fruits.splice(2, 0, "Lemon", "Kiwi");
 
 //slice
 ///The slice() method returns the selected elements in an array, as a new array object.
 
-var fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
-var citrus = fruits.slice(1);
+let fruits = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+let citrus = fruits.slice(1);
 
 //preventdefault
 
