@@ -4,64 +4,80 @@ import subheading from "./left.svg";
 import "./App.css";
 import _ from "underscore";
 function App() {
-  const [inputState, setInputState] = useState({
-    address: "",
-    apt: "",
-    zipcode: "",
-    city: "",
-    state: "",
+  const [initial, later] = useState({
+    inputs: {
+      address: "",
+      apt: "",
+      zipcode: "",
+      city: "",
+      state: "",
+    },
+    errors: {
+      address: false,
+      apt: false,
+      zipcode: false,
+      city: false,
+      state: false,
+    },
+    //checked: false,
   });
-  const [errorState, setErrorState] = useState({
-    address: false,
-    apt: false,
-    zipcode: false,
-    city: false,
-    state: false,
-  });
-  const [checkboxState, setCheckboxState] = useState(false);
-
   const handleOnChange = (event) => {
     const { name, value } = event.target;
-
-    setInputState({
-      ...inputState,
-      [name]: value,
-    });
-    setErrorState({
-      ...errorState,
-      [name]: false,
+    // const { checkedstate } = initial.checked;
+    later({
+      inputs: {
+        ...initial.inputs,
+        [name]: value,
+      },
+      errors: {
+        ...initial.errors,
+        [name]: false,
+      },
+      //  checked: [checkedstate],
     });
   };
   const handleOnBlur = (event) => {
-    const { inputs } = inputState;
-    console.log(inputState);
-    console.log(inputs);
-    if (_.isEmpty(inputs[event.target.name])) {
-      setErrorState({
-        ...errorState,
-        [event.target.name]: true,
+    const { inputs } = initial;
+    const { name, value } = event.target;
+    // const { checkedstate } = initial.checked;
+    // console.log(initial);
+    // console.log(inputs);
+    if (_.isEmpty(inputs[name])) {
+      later({
+        inputs: {
+          ...initial.inputs,
+          [name]: value,
+        },
+        errors: {
+          ...initial.errors,
+          [name]: true,
+        },
+        //  checked: [checkedstate],
       });
+      console.log(initial);
     }
   };
 
   const enabled = () => {
-    const { address, apt, city, zipcode, state } = inputState;
+    const { address, apt, city, zipcode, state } = initial;
+    // console.log(initial);
     return (
       _.isEmpty(address) ||
       _.isEmpty(apt) ||
       _.isEmpty(city) ||
       _.isEmpty(zipcode) ||
       _.isEmpty(state) ||
-      checkboxState
+      initial.checked
     );
   };
 
   const handleChange = () => {
-    const { checkedstate } = checkboxState;
-    setCheckboxState({
-      checkboxState: !checkedstate,
+    // const { checkedstate } = initial.checked;
+    later({
+      ...initial,
+      checked,
     });
-    console.log(checkboxState);
+    console.log(initial);
   };
 
   return (
@@ -76,18 +92,18 @@ function App() {
             <input
               type="text"
               className={
-                errorState?.address
+                initial?.errors?.address
                   ? "inputField form-input-fail"
                   : "inputField"
               }
               name="address"
-              value={inputState?.address}
+              value={initial?.inputs?.address}
               onChange={handleOnChange}
               onBlur={handleOnBlur}
               required
             />
             <p className="red">
-              {errorState?.address ? "This field cannot be Empty" : ""}
+              {initial?.errors?.address ? "This field cannot be Empty" : ""}
             </p>
           </div>
           <div className="container">
@@ -96,36 +112,39 @@ function App() {
             <input
               type="text"
               className={
-                errorState?.apt ? "inputField form-input-fail" : "inputField"
+                initial?.errors?.apt
+                  ? "inputField form-input-fail"
+                  : "inputField"
               }
               name="apt"
-              value={inputState?.apt}
+              value={initial?.inputs?.apt}
               onChange={handleOnChange}
               onBlur={handleOnBlur}
               required
             />
             <p className="red">
-              {errorState?.apt ? "This field cannot be Empty" : ""}
+              {initial?.errors?.apt ? "This field cannot be Empty" : ""}
             </p>
           </div>
 
           <div className="halfGrid">
+            {" "}
             <span className="label">Zipcode</span>
             <br />
             <input
               className={
-                errorState?.zipcode
+                initial?.errors?.zipcode
                   ? "inputField form-input-fail"
                   : "inputField"
               }
               type="Text"
               name="zipcode"
-              value={inputState?.zipcode}
+              value={initial?.inputs?.zipcode}
               onChange={handleOnChange}
               onBlur={handleOnBlur}
             />
             <p className="red">
-              {errorState?.zipcode ? "This field cannot be Empty" : ""}
+              {initial?.errors?.zipcode ? "This field cannot be Empty" : ""}
             </p>
           </div>
 
@@ -136,17 +155,19 @@ function App() {
               <br />
               <input
                 className={
-                  errorState?.city ? "inputField form-input-fail" : "inputField"
+                  initial?.errors?.city
+                    ? "inputField form-input-fail"
+                    : "inputField"
                 }
                 type="Text"
                 name="city"
-                value={inputState?.city}
+                value={initial?.inputs?.city}
                 onChange={handleOnChange}
                 onBlur={handleOnBlur}
               />
               <br />
               <p className="red-city">
-                {errorState?.city ? "This field cannot be Empty" : ""}
+                {initial?.errors?.city ? "This field cannot be Empty" : ""}
               </p>
             </div>
             <div className="half-right">
@@ -154,19 +175,19 @@ function App() {
               <br />
               <input
                 className={
-                  errorState?.state
+                  initial?.errors?.state
                     ? "inputField form-input-fail"
                     : "inputField"
                 }
                 type="Text"
                 name="state"
-                value={inputState?.state}
+                value={initial?.inputs?.state}
                 onChange={handleOnChange}
                 onBlur={handleOnBlur}
               />
               <br />
               <p className="red-city">
-                {errorState?.state ? "This field cannot be Empty" : ""}
+                {initial?.errors?.state ? "This field cannot be Empty" : ""}
               </p>
             </div>
           </div>
