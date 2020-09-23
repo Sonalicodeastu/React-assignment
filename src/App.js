@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import heading from "./left.png";
 import subheading from "./left.svg";
 import "./App.css";
@@ -20,6 +20,7 @@ function App() {
     state: false,
   });
   const [checkboxState, setCheckboxState] = useState(false);
+  const inputref = useRef(null);
 
   const handleOnChange = (event) => {
     const { name, value } = event.target;
@@ -35,7 +36,8 @@ function App() {
   };
   useEffect(() => {
     console.log("useeffect");
-  });
+    inputref.current.focus();
+  }, []);
 
   const handleOnBlur = (event) => {
     if (_.isEmpty(inputState[event.target.name])) {
@@ -73,6 +75,7 @@ function App() {
             <br />
             <input
               type="text"
+              ref={inputref}
               className={
                 errorState?.address
                   ? "inputField form-input-fail"
